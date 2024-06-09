@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.warehouse.controller.AdminController">
+   <children>
+      <TableView fx:id="providers" layoutX="162.0" layoutY="22.0" prefHeight="350.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="providerID" maxWidth="100.0" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="rep" maxWidth="100.0" prefWidth="100.0" text="Rep" />
+            <TableColumn fx:id="sur" maxWidth="100.0" prefWidth="100.0" text="Surname" />
+            <TableColumn fx:id="providerName" maxWidth="100.0" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="fathersName" maxWidth="100.0" prefWidth="100.0" text="FathersName" />
+            <TableColumn fx:id="provider_phone" maxWidth="100.0" prefWidth="100.0" text="Phone" />
+        </columns>
+      </TableView>
+      <TextField fx:id="surname" layoutX="14.0" layoutY="419.0" />
+      <TextField fx:id="name" layoutX="14.0" layoutY="452.0" />
+      <TextField fx:id="fatherName" layoutX="14.0" layoutY="484.0" />
+      <TextField fx:id="phone" layoutX="14.0" layoutY="517.0" />
+      <TextField fx:id="reputation" layoutX="15.0" layoutY="384.0" />
+      <Label layoutX="46.0" layoutY="364.0" text="NEW PROVIDER" />
+      <Label layoutX="171.0" layoutY="388.0" text="Reputation" />
+      <Label layoutX="176.0" layoutY="423.0" text="Surname" />
+      <Label layoutX="186.0" layoutY="456.0" text="Name" />
+      <Label layoutX="166.0" layoutY="488.0" text="Fathers name" />
+      <Label layoutX="186.0" layoutY="521.0" text="Phone" />
+      <Button layoutX="410.0" layoutY="393.0" mnemonicParsing="false" text="Call to warehose" />
+      <Button fx:id="setNewProvider" layoutX="65.0" layoutY="549.0" mnemonicParsing="false" onAction="#setNewProvider" text="Add" />
+      <Button fx:id="toOrdersList" layoutX="824.0" layoutY="549.0" mnemonicParsing="false" onAction="#toOrdersList" text="Check orders" />
+      <Text fx:id="message" fill="#40865c" layoutX="292.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label layoutX="292.0" layoutY="436.0" text="message:" />
+   </children>
+</AnchorPane>
