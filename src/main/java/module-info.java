@@ -6,7 +6,7 @@ module project.warehouse {
     requires java.sql;
     requires static lombok;
     requires jakarta.persistence;
-
+    requires criteria.api;
 
     opens project.warehouse to javafx.fxml;
     exports project.warehouse;

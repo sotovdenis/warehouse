@@ -42,7 +42,7 @@ public class OrderController {
 
     public void setOrder() {
 
-        if (phonenumber.getText().trim().isEmpty()||
+        if (phonenumber.getText().trim().isEmpty() ||
                 information.getText().trim().isEmpty()
         ) {
             methodApproved.setText("Not enough data to create order!");

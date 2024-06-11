@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order", schema = "public", catalog = "database")
+@Table(name = "reservation", schema = "public", catalog = "database")
 public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -35,5 +35,10 @@ public class OrderEntity {
     @Basic
     @Column(name = "customer_phonenumber", nullable = false, length = 255)
     private String phonenumber;
+
+    public OrderEntity(String information, Integer priority){
+        this.information = information;
+        this.priority = priority;
+    }
 
 }

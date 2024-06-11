@@ -66,15 +66,6 @@ public class AdminController {
         return session.createQuery(criteriaQuery).getResultList();
     }
 
-//    public List<OrderEntity> getListOrders() {
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<OrderEntity> criteriaQuery = builder.createQuery(OrderEntity.class);
-//        criteriaQuery.from(ProviderEntity.class);
-//
-//        return session.createQuery(criteriaQuery).getResultList();
-//    }
-
     void createProviderList() {
         providers.getColumns().clear();
         providers.getItems().clear();
@@ -99,29 +90,6 @@ public class AdminController {
         providers.getItems().addAll(getListProviders());
     }
 
-//    void createOrderList() {
-//        orders.getColumns().clear();
-//        orders.getItems().clear();
-//
-//        TableColumn<ProviderEntity, String> oID = orderID;
-//        TableColumn<ProviderEntity, String> paymentMethod = payment;
-//        TableColumn<ProviderEntity, String> paymentStatus = status;
-//        TableColumn<ProviderEntity, String> orderPriority = providerName;
-//        TableColumn<ProviderEntity, String> information = info;
-//        TableColumn<ProviderEntity, String> phoneNumber = customerPhone;
-//
-//
-//        oID.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        paymentMethod.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
-//        paymentStatus.setCellValueFactory(new PropertyValueFactory<>("paymentStatus"));
-//        orderPriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
-//        information.setCellValueFactory(new PropertyValueFactory<>("information"));
-//        phoneNumber.setCellValueFactory(new PropertyValueFactory<>("customerPhonenumber"));
-//
-//
-//        orders.getColumns().addAll(oID, paymentMethod, paymentStatus, orderPriority, information, phoneNumber);
-//        orders.getItems().addAll(getListOrders());
-//    }
 
     public void setNewProvider(ActionEvent actionEvent) {
         if (reputation.getText().trim().isEmpty() ||
@@ -135,7 +103,7 @@ public class AdminController {
             ProviderEntity provider = new ProviderEntity();
             provider.setReputation(Integer.parseInt(reputation.getText()));
             provider.setSurname(surname.getText());
-            provider.setName(providerName.getText());
+            provider.setName(name.getText());
             provider.setFatherName(fatherName.getText());
             provider.setPhone(phone.getText());
 

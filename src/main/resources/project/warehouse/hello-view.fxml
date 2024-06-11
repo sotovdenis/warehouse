@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:controller="project.warehouse.controller.HelloController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.warehouse.controller.HelloController">
     <children>
         <Text fx:id="text" layoutX="263.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Who are you?" />
         <ImageView fitHeight="292.0" fitWidth="543.0" layoutX="81.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
@@ -17,8 +17,8 @@
                 <Image url="@pictures/8.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="toOrder" layoutX="81.0" layoutY="48.0" mnemonicParsing="false" onAction="#getSceneWorker"  text="Customer" />
-        <Button fx:id="toWorker" layoutX="463.0" onAction="#getSceneAdmin" layoutY="48.0" mnemonicParsing="false" text="Worker" />
+        <Button fx:id="toOrder" layoutX="81.0" layoutY="48.0" mnemonicParsing="false" onAction="#getSceneWorker" text="Customer" />
+        <Button fx:id="toWorker" layoutX="463.0" layoutY="48.0" mnemonicParsing="false" onAction="#getSceneAdmin" text="Worker" />
         <VBox alignment="CENTER" spacing="20.0">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -26,5 +26,6 @@
 
             <Label fx:id="welcomeText" />
         </VBox>
+      <Button fx:id="toPlumber" layoutX="273.0" layoutY="48.0" mnemonicParsing="false" onAction="#getPlumberPage" text="Plumber" />
     </children>
 </AnchorPane>

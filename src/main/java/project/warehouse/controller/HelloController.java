@@ -22,11 +22,7 @@ public class HelloController {
     private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
-    public void getSceneWorker(ActionEvent actionEvent) {
+    public void getSceneWorker() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/project/warehouse/order-view.fxml"));
 
@@ -44,9 +40,29 @@ public class HelloController {
         stage.showAndWait();
     }
 
-    public void getSceneAdmin(ActionEvent actionEvent) {
+    @FXML
+    public void getSceneAdmin() {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/project/warehouse/redirect-admin-view.fxml"));
+
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Parent root = fxmlLoader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Redirect");
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void getPlumberPage() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/project/warehouse/plumber-view.fxml"));
 
 
         try {
