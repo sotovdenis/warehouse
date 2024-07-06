@@ -1,4 +1,4 @@
-package project.warehouse.controller;
+package project.warehouse.controller.admin;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaDelete;
@@ -36,8 +36,9 @@ public class AdminOrderController {
     public TextField deletedID;
     public Button deleteBtn;
     public Text message;
+    public TableColumn paymentstatus;
 
-    public void initialize() throws SQLException {
+    public void initialize(){
         createOrderList();
     }
 
@@ -54,12 +55,13 @@ public class AdminOrderController {
         orders.getColumns().clear();
         orders.getItems().clear();
 
-        TableColumn<ProviderEntity, String> oID = id;
-        TableColumn<ProviderEntity, String> payment = paymentMethod;
-        TableColumn<ProviderEntity, String> paymentStatus = status;
-        TableColumn<ProviderEntity, String> orderPriority = priority;
-        TableColumn<ProviderEntity, String> information = info;
-        TableColumn<ProviderEntity, String> phoneNumber = phone;
+        TableColumn<OrderEntity, String> oID = id;
+        TableColumn<OrderEntity, String> payment = paymentMethod;
+        TableColumn<OrderEntity, String> paymentStatus = paymentstatus;
+        TableColumn<OrderEntity, String> orderPriority = priority;
+        TableColumn<OrderEntity, String> information = info;
+        TableColumn<OrderEntity, String> phoneNumber = phone;
+        TableColumn<OrderEntity, String> statusColumn = status;
 
 
         oID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -68,47 +70,28 @@ public class AdminOrderController {
         orderPriority.setCellValueFactory(new PropertyValueFactory<>("priority"));
         information.setCellValueFactory(new PropertyValueFactory<>("information"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phonenumber"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 
-        orders.getColumns().addAll(oID, paymentMethod, paymentStatus, orderPriority, information, phoneNumber);
+        orders.getColumns().addAll(oID, payment, paymentStatus, orderPriority, information, phoneNumber, statusColumn);
         orders.getItems().addAll(getListOrders());
     }
 
+
     public void deleteBtn() {
-
         if (deletedID.getText().trim().isEmpty() || deletedID.getText().trim().toLowerCase().contains("drop")) {
             message.setText("Illegal string!");
         } else {
             int id = Integer.parseInt(deletedID.getText());
             Session session = HibernateUtil.getSessionFactory().openSession();
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaDelete criteriaDelete = criteriaBuilder.createCriteriaDelete(ProductEntity.class);
-            Root root = criteriaDelete.from(ProductEntity.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("idOrder"), id));
+            session.beginTransaction();
 
-            Transaction transaction = session.beginTransaction();
-            session.createQuery(criteriaDelete).executeUpdate();
-            transaction.commit();
-        }
-        deleteOrder();
-        createOrderList();
-        deletedID.clear();
-    }
+            OrderEntity order = session.get(OrderEntity.class, Integer.parseInt(deletedID.getText()));
 
-    public void deleteOrder() {
-        if (deletedID.getText().trim().isEmpty() || deletedID.getText().trim().toLowerCase().contains("drop")) {
-            message.setText("Illegal string!");
-        } else {
-            int id = Integer.parseInt(deletedID.getText());
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaDelete criteriaDelete = criteriaBuilder.createCriteriaDelete(OrderEntity.class);
-            Root root = criteriaDelete.from(OrderEntity.class);
-            criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
-
-            Transaction transaction = session.beginTransaction();
-            session.createQuery(criteriaDelete).executeUpdate();
-            transaction.commit();
+            order.setStatus(1);
+            session.merge(order);
+            session.getTransaction().commit();
+            initialize();
         }
     }
 }

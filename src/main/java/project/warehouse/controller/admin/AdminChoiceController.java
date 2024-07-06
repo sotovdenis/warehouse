@@ -1,4 +1,4 @@
-package project.warehouse.controller;
+package project.warehouse.controller.admin;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -32,20 +32,20 @@ public class AdminChoiceController {
     @FXML
     private ChoiceBox<String> tableChoice;
 
-    public void initialize() throws SQLException {
-        tableChoice.setItems(FXCollections.observableArrayList("Component",//DONE
-                "Product",//DONE
-                "Provider",//DONE
-                "Order",//DONE
-                "Shipment",//DONE
-                "Warehouse"));//DONE
+    public void initialize() {
+        tableChoice.setItems(FXCollections.observableArrayList("Component",
+                "Product",
+                "Provider",
+                "Order",
+                "Shipment",
+                "Warehouse"));
     }
 
     @FXML
     void createList() throws SQLException {
         box();
     }
-    public void box() throws SQLException {//TODO продолжить!!!!!!!!!!!!!!!!!!!!!!!
+    public void box() {
         String choice = tableChoice.getValue();
 
         if (choice.equalsIgnoreCase("Provider")){

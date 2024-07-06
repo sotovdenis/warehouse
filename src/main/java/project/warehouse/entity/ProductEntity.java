@@ -24,6 +24,7 @@ public class ProductEntity {
     @Column(name = "id_warehouse", nullable = false)
     private Integer idWarehouse;
     @Basic
+    @JoinColumn
     @Column(name = "id_order", nullable = false)
     private Integer idOrder;
     @Basic

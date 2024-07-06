@@ -13,7 +13,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "component", schema = "public", catalog = "database")
+@Table(name = "component", schema = "public", catalog = "database")//добавить делете и извращения с запросах для изделия все компоненты грппировка в выюором параметров
 public class ComponentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.warehouse.controller.PlumberController">
+   <children>
+      <Label layoutX="339.0" layoutY="1.0" text="Plumber workspace!">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TableView fx:id="ordersTable" layoutX="14.0" layoutY="54.0" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="cIdOrder" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="cPaymentMethod" prefWidth="100.0" text="Pay Method" />
+            <TableColumn fx:id="cPaymentStatus" prefWidth="100.0" text="Pay Status" />
+            <TableColumn fx:id="cPriority" prefWidth="100.0" text="Priority" />
+            <TableColumn fx:id="cInfo" prefWidth="100.0" text="Info" />
+            <TableColumn fx:id="cCustomerPhone" prefWidth="100.0" text="Contact" />
+        </columns>
+      </TableView>
+      <TableView fx:id="componentsTable" layoutX="14.0" layoutY="275.0" prefHeight="200.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="cIdcomponent" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="cProductIn" prefWidth="100.0" text="Participate" />
+            <TableColumn fx:id="cIdWarehouse" prefWidth="100.0" text="Location" />
+            <TableColumn fx:id="cIdShipment" prefWidth="100.0" text="ID of shipment" />
+            <TableColumn fx:id="cComponentName" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="cComponentPrice" prefWidth="100.0" text="Price" />
+            <TableColumn fx:id="cComponentWeight" prefWidth="100.0" text="Weight" />
+        </columns>
+      </TableView>
+      <TableView fx:id="productsTable" layoutX="18.0" layoutY="493.0" prefHeight="200.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="cIdProduct" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="cProductWarehouse" prefWidth="100.0" text="Location" />
+            <TableColumn fx:id="cprOrderId" prefWidth="100.0" text="Order ID" />
+            <TableColumn fx:id="cInstruction" prefWidth="100.0" text="instruction" />
+            <TableColumn fx:id="cProductName" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="cProductPrice" prefWidth="100.0" text="Price" />
+            <TableColumn fx:id="cProductWeight" prefWidth="100.0" text="Weight" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="35.0" text="Orders" />
+      <Label layoutX="14.0" layoutY="254.0" text="Components" />
+      <Label layoutX="18.0" layoutY="475.0" text="Products" />
+      <TableView fx:id="tableTodo" layoutX="743.0" layoutY="54.0" prefHeight="200.0" prefWidth="150.0">
+        <columns>
+          <TableColumn fx:id="todoName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="todoPriority" prefWidth="75.0" text="Priorirty" />
+        </columns>
+      </TableView>
+      <Label layoutX="714.0" layoutY="35.0" text="You need to do product:" />
+      <TextField fx:id="textComponentToDelete1" layoutX="746.0" layoutY="275.0" />
+      <Label layoutX="746.0" layoutY="254.0" text="Components you`ve taken:" />
+      <TextField fx:id="textComponentToDelete2" layoutX="746.0" layoutY="307.0" />
+      <TextField fx:id="textComponentToDelete3" layoutX="746.0" layoutY="341.0" />
+      <Label layoutX="746.0" layoutY="375.0" text="From warehouse:" />
+      <TextField fx:id="textWarehouse" layoutX="848.0" layoutY="370.0" prefHeight="26.0" prefWidth="47.0" />
+      <Label layoutX="746.0" layoutY="404.0" text="You closed Order:" />
+      <TextField fx:id="textClosedOrder" layoutX="848.0" layoutY="399.0" prefHeight="26.0" prefWidth="47.0" />
+      <Label layoutX="729.0" layoutY="446.0" prefHeight="18.0" prefWidth="178.0" text="You`ve created a Product. Add it!" />
+      <TextField fx:id="textInstruction" layoutX="746.0" layoutY="471.0" promptText="Instruction" />
+      <TextField fx:id="textProductName" layoutX="746.0" layoutY="503.0" promptText="Name" />
+      <Button fx:id="addNewProduct" layoutX="791.0" layoutY="539.0" mnemonicParsing="false" onAction="#addNewProduct" text="Add!" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="257.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Label layoutX="219.0" layoutY="254.0" text="Error:" />
+      <Label layoutX="787.0" layoutY="575.0" text="Message:" />
+      <Text fx:id="addMessage" fill="#20713b" layoutX="727.0" layoutY="606.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+   </children>
+</AnchorPane>

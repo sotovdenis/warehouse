@@ -14,4 +14,10 @@ module project.warehouse {
     opens project.warehouse.controller to javafx.fxml;
     exports project.warehouse.entity;
     opens project.warehouse.entity to org.hibernate.orm.core;
+    exports project.warehouse.controller.admin;
+    opens project.warehouse.controller.admin to javafx.fxml;
+    exports project.warehouse.controller.onetofive;
+    opens project.warehouse.controller.onetofive to javafx.fxml;
+    exports project.warehouse.dto;
+    opens project.warehouse.dto to org.hibernate.orm.core;
 }

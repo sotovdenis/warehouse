@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.warehouse.controller.admin.AdminOrderController">
+    <children>
+        <TableView fx:id="orders" layoutX="25.0" layoutY="14.0" prefHeight="200.0" prefWidth="700.0">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="100.0" text="ID" />
+                <TableColumn fx:id="paymentMethod" prefWidth="100.0" text="PaymentMethod" />
+                <TableColumn fx:id="paymentstatus" prefWidth="100.0" text="PaymentStatus" />
+                <TableColumn fx:id="priority" prefWidth="100.0" text="Priority" />
+                <TableColumn fx:id="info" prefWidth="100.0" text="Information" />
+                <TableColumn fx:id="phone" prefWidth="100.0" text="Phone" />
+            <TableColumn fx:id="status" prefWidth="100.0" text="Status" />
+            </columns>
+        </TableView>
+        <TextField fx:id="deletedID" layoutX="25.0" layoutY="237.0" promptText="ID to delete" />
+        <Button fx:id="deleteBtn" layoutX="74.0" layoutY="276.0" mnemonicParsing="false" onAction="#deleteBtn" text="Delete" />
+      <Text fx:id="message" fill="#3b9666" layoutX="194.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text layoutX="194.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message:" />
+    </children>
+</AnchorPane>

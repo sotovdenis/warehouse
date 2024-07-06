@@ -1,8 +1,8 @@
 package project.warehouse.controller;
+
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -12,13 +12,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.mapping.Component;
+import org.hibernate.query.Query;
 import project.warehouse.entity.ComponentEntity;
 import project.warehouse.entity.OrderEntity;
 import project.warehouse.entity.ProductEntity;
 import project.warehouse.hibernate.HibernateUtil;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,7 +131,7 @@ public class PlumberController {
     @FXML
     private TableColumn todoPriority;
 
-    public void initialize(){
+    public void initialize() {
         createOrderList();
         createComponentList();
         createProductList();
@@ -142,21 +141,21 @@ public class PlumberController {
     @FXML
     void addNewProduct() {
         if (textProductName.getText().trim().isEmpty() ||
-                textInstruction.getText().trim().isEmpty()||
-                textWarehouse.getText().trim().isEmpty()||
-                textClosedOrder.getText().trim().isEmpty()||
-                calculateWeight()==null
+                textInstruction.getText().trim().isEmpty() ||
+                textWarehouse.getText().trim().isEmpty() ||
+                textClosedOrder.getText().trim().isEmpty() ||
+                calculateWeight() == null
         ) {
             errorMessage.setText("Not enough data to create product!");
-        } else {
+        } else if (isNull()) {
             ProductEntity product = new ProductEntity();
 
             product.setName(textProductName.getText());
             product.setIdWarehouse(Integer.valueOf(textWarehouse.getText()));
             product.setIdOrder(Integer.valueOf(textClosedOrder.getText()));
             product.setInsruction(textInstruction.getText());
-            product.setPrice(calculateWeight().get(0)*1.5);//nacenOchka!
-            product.setWeight(calculateWeight().get(1)*1.1);
+            product.setPrice(calculateWeight().get(0) * 1.5);
+            product.setWeight(calculateWeight().get(1) * 1.2);
 
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -171,12 +170,93 @@ public class PlumberController {
             }
 
             addMessage.setText("You`ve added new Product!");
+            if (isNull()) {
+                setComponentIdInProduct();
+            } else errorMessage.setText("Already used component!!!");
 
             initialize();
         }
     }
 
-    public List<Double> calculateWeight(){
+    public Integer getProductCreatedId() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Integer id = null;
+
+        try {
+            Integer closedOrder = Integer.parseInt(textClosedOrder.getText());
+
+            String hql = "SELECT p.id FROM ProductEntity p WHERE p.idOrder = :closedOrder";
+            Query<Integer> query = session.createQuery(hql, Integer.class);
+            query.setParameter("closedOrder", closedOrder);
+
+            List<Integer> result = query.getResultList();
+
+            transaction.commit();
+
+            if (!result.isEmpty()) {
+                id = result.get(0);
+            }
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return id;
+    }
+
+    void setComponentIdInProduct() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+
+        if (isNull()) {
+
+            ComponentEntity component1 = session.get(ComponentEntity.class, Integer.parseInt(textComponentToDelete1.getText()));
+            component1.setIdProductIn(getProductCreatedId());
+            session.merge(component1);
+
+            ComponentEntity component2 = session.get(ComponentEntity.class, Integer.parseInt(textComponentToDelete2.getText()));
+            component2.setIdProductIn(getProductCreatedId());
+            session.merge(component2);
+
+            ComponentEntity component3 = session.get(ComponentEntity.class, Integer.parseInt(textComponentToDelete3.getText()));
+            component3.setIdProductIn(getProductCreatedId());
+            session.merge(component3);
+
+            transaction.commit();
+            session.close();
+        }
+    }
+
+    public boolean isNull() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+        Root<ComponentEntity> root = criteriaQuery.from(ComponentEntity.class);
+
+        boolean resultIsNull = true;
+
+        criteriaQuery.select(root.get("id"))
+                .where(criteriaBuilder.isNull(root.get("idProductIn")));
+
+        List<Integer> result = session.createQuery(criteriaQuery).getResultList();
+
+        if (result.contains(Integer.parseInt(textComponentToDelete1.getText()))) {
+            if (result.contains(Integer.parseInt(textComponentToDelete2.getText()))) {
+                if (result.contains(Integer.parseInt(textComponentToDelete3.getText()))) {
+                    resultIsNull = true;
+                }
+            }
+        } else {
+            errorMessage.setText("Already used component!");
+            resultIsNull = false;
+        }
+        return resultIsNull;
+    }
+
+    public List<Double> calculateWeight() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -208,7 +288,7 @@ public class PlumberController {
     public List<OrderEntity> getListOrders() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<OrderEntity> orders = session.createQuery(
-                "FROM OrderEntity ORDER BY priority DESC", OrderEntity.class)
+                        "FROM OrderEntity ORDER BY priority DESC", OrderEntity.class)
                 .getResultList();
         session.close();
         return orders;
@@ -230,7 +310,7 @@ public class PlumberController {
     public List<ComponentEntity> getListComponents() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<ComponentEntity> orders = session.createQuery(
-                "FROM ComponentEntity ORDER BY id ASC", ComponentEntity.class)
+                        "FROM ComponentEntity ORDER BY id ASC", ComponentEntity.class)
                 .getResultList();
         session.close();
         return orders;
@@ -239,7 +319,7 @@ public class PlumberController {
     public List<ProductEntity> getListProducts() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<ProductEntity> orders = session.createQuery(
-                "FROM ProductEntity ORDER BY id ASC", ProductEntity.class)
+                        "FROM ProductEntity ORDER BY id ASC", ProductEntity.class)
                 .getResultList();
         session.close();
         return orders;
@@ -269,7 +349,7 @@ public class PlumberController {
                 paymentStatusColumn,
                 priorityColumn,
                 infoColumn,
-                phoneNumberColumn );
+                phoneNumberColumn);
         ordersTable.getItems().addAll(getListOrders());
     }
 

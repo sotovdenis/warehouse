@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="1007.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.warehouse.controller.admin.AdminComponentController">
+   <children>
+      <TableView fx:id="tableShipments" layoutX="14.0" layoutY="67.0" prefHeight="298.0" prefWidth="500.0">
+        <columns>
+          <TableColumn fx:id="idShipment" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="idProviderShipment" prefWidth="100.0" text="Provider ID" />
+            <TableColumn fx:id="dateShipment" prefWidth="200.0" text="Date" />
+            <TableColumn fx:id="priorityShipment" prefWidth="100.0" text="Priority" />
+        </columns>
+      </TableView>
+      <Label layoutX="351.0" layoutY="14.0" text="Create component from shipment!">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableComponents" layoutX="14.0" layoutY="393.0" prefHeight="377.0" prefWidth="700.0">
+        <columns>
+          <TableColumn fx:id="idComponent" prefWidth="100.0" text="ID" />
+          <TableColumn fx:id="idProductInComponent" prefWidth="100.0" text="Participate" />
+            <TableColumn fx:id="idWarehouseComponent" prefWidth="100.0" text="Location" />
+            <TableColumn fx:id="idShipmentComponent" prefWidth="100.0" text="Shipment ID" />
+            <TableColumn fx:id="nameComponent" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="priceComponent" prefWidth="100.0" text="Price" />
+            <TableColumn fx:id="weightComponent" prefWidth="100.0" text="Weight" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="44.0" text="Shipments" />
+      <Label layoutX="14.0" layoutY="370.0" text="Components" />
+      <TextField fx:id="textIdWarehouse" layoutX="727.0" layoutY="98.0" promptText="Warehouse ID" />
+      <TextField fx:id="textIdShipment" layoutX="727.0" layoutY="130.0" promptText="Shipment ID" />
+      <TextField fx:id="textNameComponent" layoutX="727.0" layoutY="162.0" promptText="Name" />
+      <TextField fx:id="textPriceComponent" layoutX="727.0" layoutY="193.0" promptText="Price" />
+      <TextField fx:id="textWeightComponent" layoutX="727.0" layoutY="230.0" promptText="Weight" />
+      <Label layoutX="750.0" layoutY="67.0" text="Create component!" />
+      <Button fx:id="createComponent" layoutX="775.0" layoutY="340.0" mnemonicParsing="false" onAction="#createComponent" text="Button" />
+      <TextField fx:id="count" layoutX="776.0" layoutY="300.0" prefHeight="25.0" prefWidth="52.0" />
+      <Label layoutX="769.0" layoutY="275.0" text="Select count" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="143.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="message" fill="#067b22" layoutX="132.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+   </children>
+</AnchorPane>

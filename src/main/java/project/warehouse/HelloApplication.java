@@ -24,6 +24,7 @@ public class HelloApplication extends Application {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
+
         launch();
     }
 }

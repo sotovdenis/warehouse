@@ -18,6 +18,7 @@ import java.util.Objects;
 public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @JoinColumn
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
@@ -35,6 +36,9 @@ public class OrderEntity {
     @Basic
     @Column(name = "customer_phonenumber", nullable = false, length = 255)
     private String phonenumber;
+    @Basic
+    @Column(name = "status", nullable = false)
+    private Integer status;
 
     public OrderEntity(String information, Integer priority){
         this.information = information;

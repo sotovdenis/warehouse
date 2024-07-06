@@ -53,6 +53,7 @@ public class OrderController {
             orderEntity.setPriority(paymentMethod() ? 10 : 5);
             orderEntity.setInformation(information.getText());
             orderEntity.setPhonenumber(phonenumber.getText());
+            orderEntity.setStatus(0);
             Transaction transaction = null;
             try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                 transaction = session.beginTransaction();

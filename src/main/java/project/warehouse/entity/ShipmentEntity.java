@@ -8,7 +8,6 @@ import lombok.Setter;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Getter
 @Setter

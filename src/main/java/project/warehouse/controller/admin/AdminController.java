@@ -1,4 +1,4 @@
-package project.warehouse.controller;
+package project.warehouse.controller.admin;
 
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -35,6 +35,8 @@ public class AdminController {
     public TableColumn fathersName;
     public TableColumn provider_phone;
     public Text message;
+    public TextField textIdProviderToDelete;
+    public Button deleteProvider;
     @FXML
     private TextField fatherName;
 
@@ -138,5 +140,16 @@ public class AdminController {
         stage.setScene(new Scene(root));
         stage.setTitle("ORDER");
         stage.showAndWait();
+    }
+
+    public void deleteProvider() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction transaction = session.beginTransaction();
+
+        ProviderEntity provider = session.get(ProviderEntity.class, Integer.parseInt(textIdProviderToDelete.getText()));
+        session.remove(provider);
+
+        transaction.commit();
     }
 }
